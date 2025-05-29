@@ -15,26 +15,26 @@ const autocompleteStore2 = new AutocompleteStore(10);
 const App: React.FC = observer(() => {
   return (
     <div className="controls-container">
-      <h2>Button Control 1 (2 buttons on the right)</h2>
+      <h2>Контроллер кнопок (2 кнопки справа)</h2>
       <ButtonControl
         store={buttonControlStore1}
         buttonsRight={[
-          { text: "Clear", callback: () => buttonControlStore1.clearText() },
-          { text: "Set Hello", callback: () => buttonControlStore1.setHelloWorld() },
+          { text: "Очистить", callback: () => buttonControlStore1.clearText() },
+          { text: "Hello world!", callback: () => buttonControlStore1.setHelloWorld() },
         ]}
       />
 
-      <h2>Button Control 2 (1 button left, 1 button right)</h2>
+      <h2>Контроллер кнопок (1 кнопка слева, 1 кнопка справа)</h2>
       <ButtonControl
         store={buttonControlStore2}
-        buttonsLeft={[{ text: "Check Number", callback: () => buttonControlStore2.showNumberAlert() }]}
-        buttonsRight={[{ text: "Show Text", callback: () => buttonControlStore2.showTextAlert() }]}
+        buttonsLeft={[{ text: "Проверить число", callback: () => buttonControlStore2.showNumberAlert() }]}
+        buttonsRight={[{ text: "Показать текст", callback: () => buttonControlStore2.showTextAlert() }]}
       />
 
-      <h2>Autocomplete Control 1 (max 3 suggestions)</h2>
+      <h2>Автокомплит максимум - 3 отображения</h2>
       <AutocompleteControl store={autocompleteStore1} />
 
-      <h2>Autocomplete Control 2 (max 10 suggestions)</h2>
+      <h2>Автокомплит максимум - 10 отображений</h2>
       <AutocompleteControl store={autocompleteStore2} />
     </div>
   );

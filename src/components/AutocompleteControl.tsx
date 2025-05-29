@@ -8,12 +8,13 @@ interface AutocompleteControlProps {
 }
 
 const AutocompleteControl: React.FC<AutocompleteControlProps> = observer(({ store }) => {
+  console.log("AutocompleteControl отрендерен, предложения:", store.suggestions);
   return (
     <div className="autocomplete-container">
       <TextInput
         value={store.text}
         onChange={(value) => store.setText(value)}
-        placeholder="Enter country name"
+        placeholder="Введите название страны"
       />
       {store.suggestions.length > 0 && (
         <ul className="suggestions-list visible">

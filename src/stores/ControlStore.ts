@@ -28,7 +28,7 @@ export class ControlStore {
     if (!isNaN(num)) {
       alert(num);
     } else {
-      alert("Please enter a valid number");
+      alert("Пожалуйста, введите корректное число");
     }
   }
 }
