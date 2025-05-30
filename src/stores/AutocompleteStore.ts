@@ -15,7 +15,7 @@ export class AutocompleteStore {
 
   @action
   async setText(value: string) {
-    console.log("setText вызван со значением:", value);
+    console.log("setText called with value:", value);
     this.text = value;
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
@@ -25,30 +25,40 @@ export class AutocompleteStore {
 
   @action
   private async fetchSuggestions(value: string) {
-    console.log("Запрос предложений вызван со значением:", value);
+    console.log("fetchSuggestions called with value:", value);
     if (value) {
       try {
         const results = await getCountryByName(value);
-        console.log("API результаты:", results);
+        console.log("API results:", results);
         const uniqueSuggestions = Array.from(
           new Map(results.map((item) => [item.name, item])).values()
         );
-        console.log("Уникальные предложения:", uniqueSuggestions);
+        console.log("Unique suggestions:", uniqueSuggestions);
         this.suggestions = uniqueSuggestions.slice(0, this.maxSuggestions);
       } catch (error) {
-        console.error("Ошибка в получении запроса:", error);
+        console.error("Error fetching suggestions:", error);
         this.suggestions = [];
       }
     } else {
       this.suggestions = [];
     }
-    console.log("Текущие предложения:", this.suggestions);
+    console.log("Current suggestions:", this.suggestions);
   }
 
   @action
   selectSuggestion(suggestion: CountryInfo) {
-    console.log("выбранные предложения вызваны с:", suggestion);
+    console.log("selectSuggestion called with:", suggestion);
     this.text = suggestion.name;
+    this.suggestions = [];
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+      this.timeoutId = null;
+    }
+  }
+
+  @action
+  clearSuggestions() {
+    console.log("clearSuggestions called");
     this.suggestions = [];
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
